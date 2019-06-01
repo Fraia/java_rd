@@ -33,7 +33,15 @@ public class ContactHelper extends BaseHelper {
         type(By.name("email"), contactData.getEmail());
     }
 
+    public void initContactModification() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
     public void initContactCreation() {
         click(By.linkText("add new"));
+    }
+
+    public void submitContactModification() {
+        click(By.xpath("(//input[@name='update'])[2]"));
     }
 }
