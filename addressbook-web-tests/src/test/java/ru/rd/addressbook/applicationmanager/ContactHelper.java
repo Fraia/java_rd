@@ -2,6 +2,7 @@ package ru.rd.addressbook.applicationmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 import ru.rd.addressbook.model.ContactData;
 
 import static org.testng.Assert.assertTrue;
@@ -31,6 +32,10 @@ public class ContactHelper extends BaseHelper {
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("home"), contactData.getHomePhone());
         type(By.name("email"), contactData.getEmail());
+
+        if (isElementPresent(By.name("new_group"))) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        }
     }
 
     public void initContactModification() {
@@ -43,5 +48,15 @@ public class ContactHelper extends BaseHelper {
 
     public void submitContactModification() {
         click(By.xpath("(//input[@name='update'])[2]"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent (By.name("selected[]"));
+    }
+
+    public void createContact(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact);
+        saveContact();
     }
 }
