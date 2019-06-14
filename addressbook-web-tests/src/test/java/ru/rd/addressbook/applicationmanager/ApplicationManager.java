@@ -11,23 +11,23 @@ import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
-    public class ApplicationManager {
+public class ApplicationManager {
 
-        WebDriver wd;
+    WebDriver wd;
 
 
-        private ContactHelper contactHelper;
-        private SessionHelper SessionHelper;
-        private NavigationHelper navigationHelper;
-        private GroupHelper groupHelper;
-        private String browser;
+    private ContactHelper contactHelper;
+    private SessionHelper SessionHelper;
+    private NavigationHelper navigationHelper;
+    private GroupHelper groupHelper;
+    private String browser;
 
-        public ApplicationManager(String browser) {
-            this.browser = browser;
-        }
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
 
-        public void init() {
-            if (browser.equals(BrowserType.CHROME)) {
+    public void init() {
+        if (browser.equals(BrowserType.CHROME)) {
             wd = new ChromeDriver();
         } else if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
             wd = new InternetExplorerDriver();
         }
 
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         contactHelper = new ContactHelper(wd);
@@ -44,21 +44,20 @@ import java.util.concurrent.TimeUnit;
         SessionHelper.Login("admin", "secret");
     }
 
-      public void stop() {
-      wd.quit();
+    public void stop() {
+        wd.quit();
     }
 
 
-
-        public GroupHelper getGroupHelper() {
-            return groupHelper;
-        }
-
-        public NavigationHelper getNavigationHelper() {
-            return navigationHelper;
-        }
-
-        public ContactHelper getContactHelper() {
-            return contactHelper;
-        }
+    public GroupHelper getGroupHelper() {
+        return groupHelper;
     }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
+    }
+}
