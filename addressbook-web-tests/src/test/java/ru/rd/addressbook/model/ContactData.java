@@ -2,25 +2,62 @@ package ru.rd.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.util.Objects;
 @XStreamAlias("contact")
 
+@Entity
+@Table(name="addressbook")
 public class ContactData {
     @XStreamOmitField
+    @Id
+    @Column(name="id")
     private int id = Integer.MAX_VALUE;
+
+    @Column(name="firstname")
     private String firstname;
+
+    @Column(name="lastname")
     private String lastname;
+
+    @Column(name="address")
+    @Type(type = "text")
     private String address;
+
+    @Column(name="home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Column(name="email")
+    @Type(type = "text")
     private String email;
+
+    @Column(name="email2")
+    @Type(type = "text")
     private String email1;
+
+    @Column(name="email3")
+    @Type(type = "text")
     private String email2;
+    @Transient
     private String group;
+
+    @Column(name="mobile")
+    @Type(type = "text")
     private String mobilePhone;
+
+    @Column(name="work")
+    @Type(type = "text")
     private String workPhone;
+
+    @Transient
     private String allPhones;
+
+    @Transient
     private String allEmails;
+
 
     @Override
     public boolean equals(Object o) {
