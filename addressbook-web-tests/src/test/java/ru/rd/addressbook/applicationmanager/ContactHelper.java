@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.rd.addressbook.model.ContactData;
 import ru.rd.addressbook.model.Contacts;
+import ru.rd.addressbook.model.GroupData;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -24,7 +24,7 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
-    public void deleteContact(ContactData contact) {
+    public void deleteContact(ContactData contact) throws InterruptedException {
         selectContactById(contact.getId());
         acceptNextAlert = true;
         click(By.xpath("//input[@value='Delete']"));
@@ -39,6 +39,10 @@ public class ContactHelper extends BaseHelper {
         wd.findElement(By.cssSelector("input[value='"+ id +"']")).click();
     }
 
+    public void selectGroupToAddById(int id) {
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(id));
+    }
+
     public void fillContactForm(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
@@ -46,7 +50,8 @@ public class ContactHelper extends BaseHelper {
         type(By.name("email"), contactData.getEmail());
 
         if (isElementPresent(By.name("new_group"))) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            Assert.assertTrue(contactData.getGroups().size() == 1);
+            new Select(wd.findElement(By.name("new_group"))).selectByValue(Integer.toString(contactData.getGroups().iterator().next().getId()));
         }
     }
 
@@ -127,5 +132,19 @@ public class ContactHelper extends BaseHelper {
         return new ContactData().withFirstname(firstname).withLastname(lastname).withAddress(address)
                 .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
                 .withEmail(email1).withEmail1(email2).withEmail2(email3);
+    }
+
+    public void addContactToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroupToAddById(group.getId());
+        clickAddTo();
+    }
+
+    private void clickAddTo() {
+        click(By.name("add"));
+    }
+
+    public void selectGroupById(int id) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(Integer.toString(id));
     }
 }
