@@ -16,12 +16,15 @@ public class ContactDeletionFromGroupTest extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
+        // проверяем что существует хотя бы одна группа
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1"));
         }
 
+        // выбираем первую группу
         group = app.db().groups().iterator().next();
+        // если в выбранной группе нет контактов, создаём новый контакт в этой группе
         if (group.getContacts().size() == 0) {
             app.goTo().gotoHomePage();
             app.contact().create(new ContactData().withFirstname("Ivan").withLastname("Ivanov").withEmail("ivan@mail.ru").withHomePhone("93736283").inGroup(group));
