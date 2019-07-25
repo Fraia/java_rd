@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:6.9.4'
+    implementation 'com.google.code.gson:gson-parent:2.8.5'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.9'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.9'
+
+    
+}
+
+
