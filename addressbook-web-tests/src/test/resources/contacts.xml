@@ -1,0 +1,32 @@
+<list>
+  <contact>
+    <firstname>Ivan 0</firstname>
+    <lastname>Ivanov 0</lastname>
+    <homePhone>89208765445 0</homePhone>
+    <email>vanya0@mail.ru</email>
+  </contact>
+  <contact>
+    <firstname>Ivan 1</firstname>
+    <lastname>Ivanov 1</lastname>
+    <homePhone>89208765445 1</homePhone>
+    <email>vanya1@mail.ru</email>
+  </contact>
+  <contact>
+    <firstname>Ivan 2</firstname>
+    <lastname>Ivanov 2</lastname>
+    <homePhone>89208765445 2</homePhone>
+    <email>vanya2@mail.ru</email>
+  </contact>
+  <contact>
+    <firstname>Ivan 3</firstname>
+    <lastname>Ivanov 3</lastname>
+    <homePhone>89208765445 3</homePhone>
+    <email>vanya3@mail.ru</email>
+  </contact>
+  <contact>
+    <firstname>Ivan 4</firstname>
+    <lastname>Ivanov 4</lastname>
+    <homePhone>89208765445 4</homePhone>
+    <email>vanya4@mail.ru</email>
+  </contact>
+</list>
